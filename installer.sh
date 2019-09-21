@@ -5,6 +5,11 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+if ! hash busybox 2>/dev/null; then
+    echo "busybox is needed to run the installer."
+    exit 1
+fi
+
 mkdir -p /tmp/hc12asm
 wget -q https://hcs12text.com/files/asmide340.zip -O /tmp/hc12asm/asmide.zip --show-progress
 busybox unzip /tmp/hc12asm/asmide.zip -o -d /tmp/hc12asm/
